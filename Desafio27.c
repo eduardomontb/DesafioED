@@ -9,8 +9,7 @@
 
 typedef struct{
 
-    char nome[100];
-    char cpf[15];
+    char nome[100], cpf[15];
     int idade;
 
 }Discente;
@@ -18,8 +17,7 @@ typedef struct{
 typedef struct{
 
     char nomeCurso[100];
-    int horas, numVagas, numPart;
-    int codigo;
+    int horas, numVagas, numPart, codigo;
 
 }Curso;
 
@@ -118,11 +116,7 @@ void menuPrincipal(){
        printf("\t+------------------+\n");
 
        printf("\n\t> informe a opcao: ");
-
-       if(scanf("%d", &op) != 1){
-            fflush(stdin);
-       }
-
+       scanf("%d", &op);
        printf("\n");
 
     switch(op){
@@ -148,8 +142,9 @@ void menuPrincipal(){
         break;
 
     default:
-        printf("\n\t[aviso] Opcao invalida! [AVISO]\n");
-         pausar();
+        printf("\n\t[AVISO] Opcao invalida! [AVISO]\n");
+        getchar();
+        pausar();
         break;
 
     }
@@ -177,12 +172,8 @@ int opD = 0;
         printf("\t+-----------------+\n");
 
         printf("\n\t> informe a opcao: ");
-
-       if(scanf("%d", &opD) != 1){
-            fflush(stdin);
-       }
-
-       printf("\n");
+        scanf("%d", &opD);
+        printf("\n");
 
     switch (opD){
 
@@ -207,8 +198,9 @@ int opD = 0;
         break;
 
     default:
-        printf("\n\t!! Op��o invalida !!\n");
-         pausar();
+        printf("\n\t[AVISO] Opcao invalida [AVISO]\n");
+        getchar();
+        pausar();
         break;
     }
 
@@ -238,10 +230,7 @@ void menuCurso(){
         printf("\t+-----------------+\n");
 
         printf("\n\t> informe a opcao: ");
-
-       if(scanf("%d", &opC) != 1){
-            fflush(stdin);
-       }
+        scanf("%d", &opC);
 
        printf("\n");
 
@@ -268,8 +257,9 @@ void menuCurso(){
         break;
 
     default:
-        printf("\n\t!! Op��o invalida !!\n");
-         pausar();
+        printf("\n\t[AVISO] Opcaoo invalida [AVISO]\n");
+        getchar();
+        pausar();
         break;
     }
 
@@ -290,6 +280,7 @@ void menuTurma(){
     int opT = 0;
 
     do{
+
         system("cls");
 
         printf("\t+-----------------+\n");
@@ -306,13 +297,11 @@ void menuTurma(){
 
         printf("\n\t> informe a opcao: ");
         scanf("%d", &opT);
-        getchar();
-
-       printf("\n");
+        printf("\n");
 
     switch (opT){
+        case 1:
 
-    case 1:
         cadTurma();
         break;
 
@@ -333,7 +322,8 @@ void menuTurma(){
         break;
 
     default:
-        printf("\n\t!! Opcao invalida !!\n");
+        printf("\n\t[AVISO] Opcao invalida [AVISO]\n");
+        getchar();
         pausar();
         break;
     }
@@ -359,12 +349,12 @@ void menuRelatorios(){
 
         printf("\t+---------------------------------------------------------------------------------------------------------+\n");
         printf("\t| 1 - Listagem do cpf, nome e idade dos discentes.                                                        |\n");
-        printf("\t| 2 - Listagem dos códigos, nomes, horas e número de vagas dos cursos.                                  |\n");
+        printf("\t| 2 - Listagem dos codigos, nomes, horas e numero de vagas dos cursos.                                    |\n");
         printf("\t| 3 - Listagem de todos os discentes a partir de uma palavra do nome.                                     |\n");
-        printf("\t| 4 - Listagem do número da turma, cpf, nome e nota do discente.                                         |\n");
-        printf("\t| 5 - Listagem dos números das turmas, cpf, nome e nota do discente, bem como o código e nome do curso. |\n");
-        printf("\t| 6 - Listagem do cpf, nome e nota do discente conforme o número da turma.                               |\n");
-        printf("\t| 7 - Listagem de todas as turmas, bem como a média das notas dos discentes.                             |\n");
+        printf("\t| 4 - Listagem do numero da turma, cpf, nome e nota do discente.                                          |\n");
+        printf("\t| 5 - Listagem dos numeros das turmas, cpf, nome e nota do discente, bem como o codigo e nome do curso.   |\n");
+        printf("\t| 6 - Listagem do cpf, nome e nota do discente conforme o numero da turma.                                |\n");
+        printf("\t| 7 - Listagem de todas as turmas, bem como a media das notas dos discentes.                              |\n");
         printf("\t| 8 - Voltar                                                                                              |\n");
         printf("\t+---------------------------------------------------------------------------------------------------------+\n");
 
@@ -410,7 +400,8 @@ void menuRelatorios(){
         return;
 
     default:
-        printf("\n\t!! Opção invalida !!\n");
+        printf("\n\t[AVISO] Opcao invalida [AVISO]\n");
+        getchar();
         pausar();
         break;
     }
@@ -1151,8 +1142,8 @@ void ediTurma(){
             achouTurma = 1;
 
             printf("\n\tNome: %s |", turmas[i].aluno.nome);
-            printf("CPF : %s |", turmas[i].aluno.cpf);
-            printf("Nota: %.2f |", turmas[i].nota);
+            printf(" CPF : %s |", turmas[i].aluno.cpf);
+            printf(" Nota: %.2f |", turmas[i].nota);
         }
     }
 
@@ -1162,7 +1153,7 @@ void ediTurma(){
         return;
     }
 
-    printf("\n\t> Digite o CPF do discente para editar: ");
+    printf("\n\n\t> Digite o CPF do discente para editar: ");
     fgets(cpfEdita, 15, stdin);
     cpfEdita[strcspn(cpfEdita, "\n")] = '\0';
 
@@ -1186,7 +1177,7 @@ void ediTurma(){
 
             salvarTurmas();
 
-            printf("\n\tRegistro editado com sucesso!\n");
+            printf("\n\t[AVISO]Registro editado com sucesso! [AVISO]\n");
             getchar();
             getchar();
             return;
@@ -1206,7 +1197,7 @@ void cadTurma() {
     getchar();
 
     if (quantTurm >= MAXturma){
-        printf("\n\t[ERRO] Limite de turmas atingido!\n");
+        printf("\n\t[ERRO] Limite de turmas atingido! [ERRO]\n");
         pausar();
         return;
     }
@@ -1231,7 +1222,7 @@ void cadTurma() {
     }
 
     if(posDisc == -1){
-        printf("\n\t[ERRO] Discente nao encontrado!\n");
+        printf("\n\t[ERRO] Discente nao encontrado! [ERRO]\n");
         pausar();
         return;
     }
@@ -1247,7 +1238,7 @@ void cadTurma() {
     }
 
     if(posCurso == -1){
-        printf("\n\t[ERRO] Curso nao encontrado!\n");
+        printf("\n\t[ERRO] Curso nao encontrado! [ERRO]\n");
         pausar();
         return;
     }
@@ -1260,7 +1251,7 @@ void cadTurma() {
         if(turmas[i].numTurma == turmas[quantTurm].numTurma &&
            strcmp(turmas[i].aluno.cpf, cpfBusca) == 0){
 
-            printf("\n\t[ERRO] Aluno ja matriculado nessa turma.\n");
+            printf("\n\t[ERRO] Aluno ja matriculado nessa turma. [ERRO]\n");
             pausar();
             return;
         }
@@ -1284,7 +1275,7 @@ void cadTurma() {
     quantTurm++;
     salvarTurmas();
 
-    printf("\n\tDiscente matriculado com sucesso!\n");
+    printf("\t[AVISO] Discente matriculado com sucesso! [AVISO]\n");
     pausar();
 }
 
@@ -1319,10 +1310,10 @@ void pesTurma(){
             achou = 1;
 
             printf("\n\t> Nome: %s", turmas[i].aluno.nome);
-            printf(" | Cod. Curso: %d", turmas[i].curso.codigo);
-            printf(" | CPF: %s", turmas[i].aluno.cpf);
-            printf(" | Nota: %.1f", turmas[i].nota);
-            printf(" | Horas Part.: %.1f", turmas[i].horasPart);
+            printf(" - Cod. Curso: %d", turmas[i].curso.codigo);
+            printf(" - CPF: %s", turmas[i].aluno.cpf);
+            printf(" - Nota: %.1f", turmas[i].nota);
+            printf(" - Horas Part.: %.1f", turmas[i].horasPart);
         }
     }
 
@@ -1330,7 +1321,7 @@ void pesTurma(){
         printf("\n\t[AVISO] Numero da turma nao encontrado [AVISO]\n");
     }
 
-    printf("\n");
+    printf("\n\n");
     pausar();
 }
 
@@ -1358,7 +1349,7 @@ void excTurma(){
     }
 
     if(achou == 0){
-        printf("\n\t[AVISO] Turma %d nao encontrada!\n", buscaNum);
+        printf("\n\t[AVISO] Turma %d nao encontrada! [AVISO]\n", buscaNum);
         pausar();
         return;
     }
@@ -1385,11 +1376,11 @@ void excTurma(){
 
         salvarTurmas();
 
-        printf("\n\t[SUCESSO] Turma %d excluida com exito!\n", buscaNum);
+        printf("\n\t[AVISO] Turma %d excluida com exito! [AVISO]\n", buscaNum);
 
     }else{
 
-        printf("\n\tExclusao cancelada.\n");
+        printf("\n\t[AVISO] Exclusao cancelada. [AVISO]\n");
     }
 
     pausar();
@@ -1494,7 +1485,7 @@ void A(){
         printf("\n\tNome: %s \n\tCPF: %s \n\tIdade: %d\n\n", discentes[i].nome, discentes[i].cpf, discentes[i].idade);
     }
 
-    printf("\n\n\t[AVISO] Todos os discentes listados! [AVISO]");
+    printf("\n\n\t[AVISO] Todos os discentes listados! [AVISO]\n");
     pausar();
 }
 
@@ -1514,12 +1505,13 @@ void B(){
     printf("\t+------------------+\n");
 
     for(int i=0;i<quantCurs;i++){
-
-        printf("\n\tNome: %s \n\tCodigo: %d \n\tHoras: %d \n\tNum. vagas: %d \n\tNum. part.: %d\n\n", cursos[i].nomeCurso,
+        printf("\n\t-----------------------------------");
+        printf("\n\tNome: %s \n\tCodigo: %d \n\tHoras: %d \n\tNum. vagas: %d \n\tNum. part.: %d", cursos[i].nomeCurso,
                cursos[i].codigo, cursos[i].horas, cursos[i].numVagas, cursos[i].numPart);
+        printf("\n\t-----------------------------------\n");
     }
 
-    printf("\n\n\t[AVISO] Todos os cursos listados [AVISO]");
+    printf("\n\n\t[AVISO] Todos os cursos listados [AVISO]\n");
     pausar();
 }
 
@@ -1561,7 +1553,7 @@ void C(){
 
     }
 
-    printf("\n\t[AVISO] Busca finalizada com sucesso! [AVISO]");
+    printf("\n\t[AVISO] Busca finalizada com sucesso! [AVISO]\n");
     pausar();
     getchar();
 }
@@ -1584,14 +1576,15 @@ void D(){
 
     for(int i= 0; i < quantTurm; i++){
 
+        printf("\n\t-------------------------------");
         printf("\n\tTurma: %d", turmas[i].numTurma);
         printf("\n\tCPF: %s", turmas[i].aluno.cpf);
         printf("\n\tNome: %s", turmas[i].aluno.nome);
         printf("\n\tNota: %.2f", turmas[i].nota);
-        printf("\n\t----------------------------\n");
+        printf("\n\t------------------------------\n");
     }
 
-    printf("\n\t[AVISO] Todas as turmas listadas [AVISO]n");
+    printf("\n\t[AVISO] Todas as turmas listadas [AVISO]\n");
     pausar();
 }
 
@@ -1613,14 +1606,14 @@ void E(){
 
     for(int i = 0; i < quantTurm; i++){
 
+        printf("\n\t-----------------------------------");
         printf("\n\tTurma: %d", turmas[i].numTurma);
         printf("\n\tCPF: %s", turmas[i].aluno.cpf);
         printf("\n\tNome: %s", turmas[i].aluno.nome);
         printf("\n\tNota: %.2f", turmas[i].nota);
         printf("\n\tCod. Curso: %d", turmas[i].curso.codigo);
         printf("\n\tNome Curso: %s", turmas[i].curso.nomeCurso);
-
-        printf("\n\t--------------------------------------------\n");
+        printf("\n\t-----------------------------------\n");
     }
 
     printf("\n\t[AVISO] Listagem concluida! [AVISO]\n");
@@ -1656,11 +1649,11 @@ void F(){
             }
             achou = 1;
 
-            printf("\n\t> Nome: %s |", turmas[i].aluno.nome);
-            printf(" Cod. Curso: %d |", turmas[i].curso.codigo);
-            printf(" CPF: %s |", turmas[i].aluno.cpf);
-            printf(" Nota: %.1f |", turmas[i].nota);
-            printf(" Horas Part.: %.1f |", turmas[i].horasPart);
+            printf("\n\t> Nome: %s -", turmas[i].aluno.nome);
+            printf(" Cod. Curso: %d -", turmas[i].curso.codigo);
+            printf(" CPF: %s -", turmas[i].aluno.cpf);
+            printf(" Nota: %.1f -", turmas[i].nota);
+            printf(" Horas Part.: %.1f ", turmas[i].horasPart);
         }
     }
 
@@ -1668,7 +1661,7 @@ void F(){
         printf("\n\t[AVISO] Numero da turma nao encontrado [AVISO]\n");
     }
 
-    printf("\n");
+    printf("\n\n");
     pausar();
 }
 
