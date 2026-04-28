@@ -7,6 +7,8 @@
 #define MAXcurso 6
 #define MAXturma 30
 
+//structs
+
 typedef struct{
 
     char nome[100], cpf[15];
@@ -24,15 +26,19 @@ typedef struct{
 typedef struct{
 
     int numTurma, ano;
-    Discente aluno;
-    Curso curso;
+    Discente aluno; //Turma tem Discente aluno
+    Curso curso; //Turma tem Curso curso
     float nota, horasPart;
 
 }Turma;
 
-Discente discentes[MAXdiscente];
-Curso cursos[MAXcurso];
-Turma turmas[MAXturma];
+// Vetores de Struct
+
+Discente discentes[MAXdiscente]; //vários alunos
+Curso cursos[MAXcurso]; //vários cursos
+Turma turmas[MAXturma]; //várias matrículas em turma
+
+//Contadores
 
 int quantDisc = 0;
 int quantCurs = 0;
@@ -359,12 +365,8 @@ void menuRelatorios(){
         printf("\t+---------------------------------------------------------------------------------------------------------+\n");
 
         printf("\n\t> informe a opcao: ");
-
-       if(scanf("%d", &opR) != 1){
-            fflush(stdin);
-       }
-
-       printf("\n");
+        scanf("%d", &opR)
+        printf("\n");
 
     switch (opR){
 
@@ -640,9 +642,7 @@ void ediDiscente(){
 
                     printf("\n\t!!! Dados atualizados  !!!\n");
                     salvarDiscentes();
-                    printf("\tPressione qualquer tecla para voltar ao menu principal...");
-                    fflush(stdin);
-                    getchar();
+                    pausar();
                     return;
 
                 case 2:
@@ -962,9 +962,7 @@ void pesCurso(){
             printf("\t>Num. vagas: %d\n", cursos[i].numVagas);
             printf("\t>Num. participantes: %d\n", cursos[i].numPart);
 
-
-            printf("\n\tPressione qualquer tecla para voltar ao menu principal...");
-            fflush(stdin);
+            pausar();
             getchar();
 
         }
@@ -1216,7 +1214,7 @@ void cadTurma() {
 
     for (int i = 0; i < quantDisc; i++) {
         if (strcmp(discentes[i].cpf, cpfBusca) == 0) {
-            posDisc = i;
+            posDisc = i;----
             break;
         }
     }
