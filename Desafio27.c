@@ -1105,7 +1105,7 @@ void carregarCursos(){
 
 //===== FUNÇÕES TURMA =====
 
-void cadTurma() {
+void cadTurma(){
 
     getchar();
 
@@ -1161,8 +1161,7 @@ void cadTurma() {
     getchar();
 
     for(int i=0; i<quantTurm; i++){
-        if(turmas[i].numTurma == turmas[quantTurm].numTurma &&
-           strcmp(turmas[i].aluno.cpf, cpfBusca) == 0){
+        if(turmas[i].numTurma == turmas[quantTurm].numTurma && strcmp(turmas[i].aluno.cpf, cpfBusca) == 0){
 
             printf("\n\t[ERRO] Aluno ja matriculado nessa turma. [ERRO]\n");
             pausar();
@@ -1218,11 +1217,13 @@ void ediTurma(){
         if(turmas[i].numTurma == numBusca){
             achouTurma = 1;
 
-            printf("\n\tNome: %s |", turmas[i].aluno.nome);
-            printf(" CPF : %s |", turmas[i].aluno.cpf);
-            printf(" Nota: %.2f |", turmas[i].nota);
+            printf("\n\tNome: %s -", turmas[i].aluno.nome);
+            printf(" CPF : %s -", turmas[i].aluno.cpf);
+            printf(" Nota: %.2f -", turmas[i].nota);
+            printf(" Horas participacao: %.2f -", turmas[i].horasPart);
+            printf(" Ano: %d", turmas[i].ano);
         }
-    } 
+    }
 
     if (achouTurma == 0) {
         printf("\n\t[AVISO] Nenhuma matricula encontrada para a turma %d [AVISO]\n", numBusca);
@@ -1235,15 +1236,13 @@ void ediTurma(){
     cpfEdita[strcspn(cpfEdita, "\n")] = '\0';
 
     for(int i=0; i<quantTurm; i++){
-
-        if(turmas[i].numTurma == numBusca &&
-           strcmp(turmas[i].aluno.cpf, cpfEdita) == 0){
+        if(turmas[i].numTurma == numBusca && strcmp(turmas[i].aluno.cpf, cpfEdita) == 0){
 
             achouDisc = 1;
 
-            printf("\n\tAluno encontrado: %s\n", turmas[i].aluno.nome);
+            printf("\n\tAluno selecionado: %s\n", turmas[i].aluno.nome);
 
-            printf("\t> Nova nota: ");
+            printf("\n\t> Nova nota: ");
             scanf("%f", &turmas[i].nota);
 
             printf("\t> Novas horas participacao: ");
@@ -1255,8 +1254,7 @@ void ediTurma(){
             salvarTurmas();
 
             printf("\n\t[AVISO]Registro editado com sucesso! [AVISO]\n");
-            getchar();
-            getchar();
+            pausar();
             return;
         }
     }
@@ -1275,6 +1273,7 @@ void excTurma(){
 
     int buscaNum, opE;
     int achou = 0;
+    int contAlunos = 0;
 
     system("cls");
 
@@ -1288,7 +1287,15 @@ void excTurma(){
 
     for(int i = 0; i < quantTurm; i++){
         if(turmas[i].numTurma == buscaNum){
-            achou++;
+            achou = 1;
+
+            printf("\n\tNome: %s -", turmas[i].aluno.nome);
+            printf(" CPF : %s -", turmas[i].aluno.cpf);
+            printf(" Nota: %.2f -", turmas[i].nota);
+            printf(" Horas participacao: %.2f -", turmas[i].horasPart);
+            printf(" Ano: %d", turmas[i].ano);
+
+            contAlunos++;
         }
     }
 
@@ -1298,7 +1305,7 @@ void excTurma(){
         return;
     }
 
-    printf("\n\tA turma %d possui %d discente(s) vinculado(s).\n", buscaNum, achou);
+    printf("\n\n\tA turma %d possui %d discente(s) vinculado(s).\n", buscaNum, contAlunos);
 
     printf("\n\tDeseja realmente excluir TODOS os registros?");
     printf("\n\t1 - SIM");
@@ -1319,7 +1326,7 @@ void excTurma(){
 
         salvarTurmas();
 
-        printf("\n\t[AVISO] Turma %d excluida com exito! [AVISO]\n", buscaNum);
+        printf("\n\t[AVISO] Turma %d excluida! [AVISO]\n", buscaNum);
 
     }else{
 
@@ -1487,7 +1494,6 @@ void B(){
 }
 
 void C(){
-
     getchar();
     system("cls");
 
@@ -1530,7 +1536,6 @@ void C(){
 }
 
 void D(){
-
     getchar();
     system("cls");
 
@@ -1560,7 +1565,6 @@ void D(){
 }
 
 void E(){
-
     getchar();
     system("cls");
 
@@ -1668,7 +1672,7 @@ void G(){
         if(repetida == 0){
 
             somaNotas = 0;
-            int contadorAlunos = 0;
+            int contAlunos = 0;
 
             printf("\n\t----------------------------------");
             printf("\n\tTurma: %d", turmaAtual);
@@ -1678,15 +1682,15 @@ void G(){
                 if(turmas[k].numTurma == turmaAtual){
 
                     somaNotas += turmas[k].nota;
-                    contadorAlunos++;
+                    contAlunos++;
 
                     printf("\n\t> %s - Nota: %.1f",turmas[k].aluno.nome ,turmas[k].nota);
                 }
             }
 
-            mediaFinal = somaNotas / contadorAlunos;
+            mediaFinal = somaNotas / contAlunos;
 
-            printf("\n\t> Quantidade de alunos: %d", contadorAlunos);
+            printf("\n\t> Quantidade de alunos: %d", contAlunos);
             printf("\n\t> Media da turma: %.1f", mediaFinal);
             printf("\n\t----------------------------------\n");
         }
