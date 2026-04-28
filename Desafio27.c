@@ -7,8 +7,6 @@
 #define MAXcurso 6
 #define MAXturma 30
 
-//structs
-
 typedef struct{
 
     char nome[100], cpf[15];
@@ -26,19 +24,15 @@ typedef struct{
 typedef struct{
 
     int numTurma, ano;
-    Discente aluno; //Turma tem Discente aluno
-    Curso curso; //Turma tem Curso curso
+    Discente aluno;
+    Curso curso;
     float nota, horasPart;
 
 }Turma;
 
-// Vetores de Struct
-
-Discente discentes[MAXdiscente]; //vários alunos
-Curso cursos[MAXcurso]; //vários cursos
-Turma turmas[MAXturma]; //várias matrículas em turma
-
-//Contadores
+Discente discentes[MAXdiscente];
+Curso cursos[MAXcurso];
+Turma turmas[MAXturma];
 
 int quantDisc = 0;
 int quantCurs = 0;
@@ -365,7 +359,7 @@ void menuRelatorios(){
         printf("\t+---------------------------------------------------------------------------------------------------------+\n");
 
         printf("\n\t> informe a opcao: ");
-        scanf("%d", &opR)
+        scanf("%d", &opR);
         printf("\n");
 
     switch (opR){
@@ -493,91 +487,6 @@ void cadDiscente(){
     pausar();
 }
 
-void excDiscente(){
-
-    char cpfBusca[15];
-    int achou = 0;
-
-    getchar();
-    system("cls");
-
-    printf("\n");
-    printf("\t+-----------------------+\n");
-    printf("\t|   EXCLUIR DISCENTE    |\n");
-    printf("\t+-----------------------+\n");
-    printf("\n\t> Digite o CPF do discente que deseja excluir: ");
-    fgets(cpfBusca, 15, stdin);
-    cpfBusca[strcspn(cpfBusca, "\n")] = '\0';
-
-    int opE;
-
-    for(int i=0; i < quantDisc; i++){
-         if(strcmp(discentes[i].cpf, cpfBusca) == 0){
-            achou = 1;
-
-            do{
-                system("cls");
-
-                printf("\n");
-                printf("\t+------------------------+\n");
-                printf("\t|   DISCENTE ENCONTRADO  |\n");
-                printf("\t+------------------------+\n");
-                printf("\n\t>Nome: %s\n", discentes[i].nome);
-                printf("\t>idade: %d\n", discentes[i].idade);
-                printf("\t>CPF: %s\n", discentes[i].cpf);
-
-                printf("\n");
-
-                printf("\t+--------------------------------------+\n");
-                printf("\t| Deseja excluir os dados do discente? |\n");
-                printf("\t+--------------------------------------+\n");
-                printf("\t1 - SIM\n");
-                printf("\t2 - NAO\n");
-                printf("\t> informe a opcao: ");
-                scanf("%d", &opE);
-                getchar();
-
-                printf("\n");
-
-                switch(opE){
-
-                case 1:
-
-                    discentes[i] = discentes[quantDisc - 1];
-                    quantDisc--;
-                    salvarDiscentes();
-
-                    printf("\n\t[AVISO] Discente excluido com sucesso! [AVISO]\n");
-                    pausar();
-                    return;
-
-                case 2:
-                    printf("\n\t[AVISO] Exclusao cancelada. [AVISO]\n");
-                    pausar();
-                    return;
-
-                default:
-                    printf("\t[AVISO] Opcao invalida... [AVISO]\n");
-                    pausar();
-                    break;
-
-                }
-
-            }while(1);
-
-
-
-        }
-
-   }
-
-   if(achou == 0) {
-        printf("\n\n\t[AVIOS] Discente com CPF %s nao encontrado! [AVISO]\n", cpfBusca);
-       pausar();
-    }
-
-}
-
 void ediDiscente(){
 
     getchar();
@@ -667,6 +576,91 @@ void ediDiscente(){
         printf("\n\t[AVISO] CPF do discente nao encontrado [AVISO]\n");
         pausar();
 
+    }
+
+}
+
+void excDiscente(){
+
+    char cpfBusca[15];
+    int achou = 0;
+
+    getchar();
+    system("cls");
+
+    printf("\n");
+    printf("\t+-----------------------+\n");
+    printf("\t|   EXCLUIR DISCENTE    |\n");
+    printf("\t+-----------------------+\n");
+    printf("\n\t> Digite o CPF do discente que deseja excluir: ");
+    fgets(cpfBusca, 15, stdin);
+    cpfBusca[strcspn(cpfBusca, "\n")] = '\0';
+
+    int opE;
+
+    for(int i=0; i < quantDisc; i++){
+         if(strcmp(discentes[i].cpf, cpfBusca) == 0){
+            achou = 1;
+
+            do{
+                system("cls");
+
+                printf("\n");
+                printf("\t+------------------------+\n");
+                printf("\t|   DISCENTE ENCONTRADO  |\n");
+                printf("\t+------------------------+\n");
+                printf("\n\t>Nome: %s\n", discentes[i].nome);
+                printf("\t>idade: %d\n", discentes[i].idade);
+                printf("\t>CPF: %s\n", discentes[i].cpf);
+
+                printf("\n");
+
+                printf("\t+--------------------------------------+\n");
+                printf("\t| Deseja excluir os dados do discente? |\n");
+                printf("\t+--------------------------------------+\n");
+                printf("\t1 - SIM\n");
+                printf("\t2 - NAO\n");
+                printf("\t> informe a opcao: ");
+                scanf("%d", &opE);
+                getchar();
+
+                printf("\n");
+
+                switch(opE){
+
+                case 1:
+
+                    discentes[i] = discentes[quantDisc - 1];
+                    quantDisc--;
+                    salvarDiscentes();
+
+                    printf("\n\t[AVISO] Discente excluido com sucesso! [AVISO]\n");
+                    pausar();
+                    return;
+
+                case 2:
+                    printf("\n\t[AVISO] Exclusao cancelada. [AVISO]\n");
+                    pausar();
+                    return;
+
+                default:
+                    printf("\t[AVISO] Opcao invalida... [AVISO]\n");
+                    pausar();
+                    break;
+
+                }
+
+            }while(1);
+
+
+
+        }
+
+   }
+
+   if(achou == 0) {
+        printf("\n\n\t[AVIOS] Discente com CPF %s nao encontrado! [AVISO]\n", cpfBusca);
+       pausar();
     }
 
 }
@@ -930,50 +924,6 @@ void ediCurso(){
 
 }
 
-void pesCurso(){
-
-    getchar();
-
-    int achou = 0;
-    int codBusca = 0;
-
-    system("cls");
-
-    printf("\t+---------------------+\n");
-    printf("\t|   PROCURAR CURSO   |\n");
-    printf("\t+---------------------+\n");
-
-    printf("\n\t> Digite o codigo do curso: ");
-    scanf("%d", &codBusca);
-
-    printf("\n");
-
-    for(int i=0; i<quantCurs; i++){
-        if(codBusca==cursos[i].codigo){
-            achou = 1;
-
-            printf("\t+-----------------------+\n");
-            printf("\t|    CURSO ENCONTRADO   |\n");
-            printf("\t+-----------------------+\n");
-
-            printf("\n\t>Nome: %s\n", cursos[i].nomeCurso);
-            printf("\t>Codigo: %d\n", cursos[i].codigo);
-            printf("\t>Horas: %d\n", cursos[i].horas);
-            printf("\t>Num. vagas: %d\n", cursos[i].numVagas);
-            printf("\t>Num. participantes: %d\n", cursos[i].numPart);
-
-            pausar();
-            getchar();
-
-        }
-
-    }if(achou == 0){
-        printf("\n\t[AVIOS] codigo do curso não encontrado [AVISO]\n");
-        pausar();
-    }
-
-}
-
 void excCurso(){
 
     getchar();
@@ -1057,6 +1007,48 @@ void excCurso(){
 
 }
 
+void pesCurso(){
+
+    getchar();
+
+    int achou = 0;
+    int codBusca = 0;
+
+    system("cls");
+
+    printf("\t+---------------------+\n");
+    printf("\t|   PROCURAR CURSO   |\n");
+    printf("\t+---------------------+\n");
+
+    printf("\n\t> Digite o codigo do curso: ");
+    scanf("%d", &codBusca);
+
+    printf("\n");
+
+    for(int i=0; i<quantCurs; i++){
+        if(codBusca==cursos[i].codigo){
+            achou = 1;
+
+            printf("\t+-----------------------+\n");
+            printf("\t|    CURSO ENCONTRADO   |\n");
+            printf("\t+-----------------------+\n");
+
+            printf("\n\t>Nome: %s\n", cursos[i].nomeCurso);
+            printf("\t>Codigo: %d\n", cursos[i].codigo);
+            printf("\t>Horas: %d\n", cursos[i].horas);
+            printf("\t>Num. vagas: %d\n", cursos[i].numVagas);
+            printf("\t>Num. participantes: %d\n", cursos[i].numPart);
+
+            pausar();
+        }
+
+    }if(achou == 0){
+        printf("\n\t[AVIOS] codigo do curso não encontrado [AVISO]\n");
+        pausar();
+    }
+
+}
+
 //==== ARQUIVOS CURSO ====
 
 int salvarCursos(){
@@ -1113,83 +1105,6 @@ void carregarCursos(){
 
 //===== FUNÇÕES TURMA =====
 
-void ediTurma(){
-
-    int numBusca, achouTurma = 0, achouDisc = 0;
-    char cpfEdita[15];
-
-    system("cls");
-    printf("\n");
-    printf("\t+-------------------+\n");
-    printf("\t|   EDITAR TURMA    |\n");
-    printf("\t+-------------------+\n");
-
-    printf("\n\t> Digite o numero da turma: ");
-    scanf("%d", &numBusca);
-    getchar();
-
-    system("cls");
-
-    printf("\n");
-    printf("\t+---------------------------------+\n");
-    printf("\t| DISCENTES MATRICULADOS NA TURMA |\n");
-    printf("\t+---------------------------------+\n");
-
-    for(int i=0; i<quantTurm; i++){
-        if(turmas[i].numTurma == numBusca){
-            achouTurma = 1;
-
-            printf("\n\tNome: %s |", turmas[i].aluno.nome);
-            printf(" CPF : %s |", turmas[i].aluno.cpf);
-            printf(" Nota: %.2f |", turmas[i].nota);
-        }
-    }
-
-    if (achouTurma == 0) {
-        printf("\n\t[AVISO] Nenhuma matricula encontrada para a turma %d [AVISO]\n", numBusca);
-        pausar();
-        return;
-    }
-
-    printf("\n\n\t> Digite o CPF do discente para editar: ");
-    fgets(cpfEdita, 15, stdin);
-    cpfEdita[strcspn(cpfEdita, "\n")] = '\0';
-
-    for(int i=0; i<quantTurm; i++){
-
-        if(turmas[i].numTurma == numBusca &&
-           strcmp(turmas[i].aluno.cpf, cpfEdita) == 0){
-
-            achouDisc = 1;
-
-            printf("\n\tAluno encontrado: %s\n", turmas[i].aluno.nome);
-
-            printf("\t> Nova nota: ");
-            scanf("%f", &turmas[i].nota);
-
-            printf("\t> Novas horas participacao: ");
-            scanf("%f", &turmas[i].horasPart);
-
-            printf("\t> Novo ano: ");
-            scanf("%d", &turmas[i].ano);
-
-            salvarTurmas();
-
-            printf("\n\t[AVISO]Registro editado com sucesso! [AVISO]\n");
-            getchar();
-            getchar();
-            return;
-        }
-    }
-
-    if (achouDisc == 0) {
-        printf("\n\t[ERRO] O CPF %s nao pertence a turma %d.\n", cpfEdita, numBusca);
-    }
-
-   pausar();
-   return;
-}
-
 void cadTurma() {
 
     getchar();
@@ -1214,7 +1129,7 @@ void cadTurma() {
 
     for (int i = 0; i < quantDisc; i++) {
         if (strcmp(discentes[i].cpf, cpfBusca) == 0) {
-            posDisc = i;----
+            posDisc = i;
             break;
         }
     }
@@ -1277,6 +1192,143 @@ void cadTurma() {
     pausar();
 }
 
+void ediTurma(){
+
+    int numBusca, achouTurma = 0, achouDisc = 0;
+    char cpfEdita[15];
+
+    system("cls");
+    printf("\n");
+    printf("\t+-------------------+\n");
+    printf("\t|   EDITAR TURMA    |\n");
+    printf("\t+-------------------+\n");
+
+    printf("\n\t> Digite o numero da turma: ");
+    scanf("%d", &numBusca);
+    getchar();
+
+    system("cls");
+
+    printf("\n");
+    printf("\t+---------------------------------+\n");
+    printf("\t| DISCENTES MATRICULADOS NA TURMA |\n");
+    printf("\t+---------------------------------+\n");
+
+    for(int i=0; i<quantTurm; i++){
+        if(turmas[i].numTurma == numBusca){
+            achouTurma = 1;
+
+            printf("\n\tNome: %s |", turmas[i].aluno.nome);
+            printf(" CPF : %s |", turmas[i].aluno.cpf);
+            printf(" Nota: %.2f |", turmas[i].nota);
+        }
+    } 
+
+    if (achouTurma == 0) {
+        printf("\n\t[AVISO] Nenhuma matricula encontrada para a turma %d [AVISO]\n", numBusca);
+        pausar();
+        return;
+    }
+
+    printf("\n\n\t> Digite o CPF do discente para editar: ");
+    fgets(cpfEdita, 15, stdin);
+    cpfEdita[strcspn(cpfEdita, "\n")] = '\0';
+
+    for(int i=0; i<quantTurm; i++){
+
+        if(turmas[i].numTurma == numBusca &&
+           strcmp(turmas[i].aluno.cpf, cpfEdita) == 0){
+
+            achouDisc = 1;
+
+            printf("\n\tAluno encontrado: %s\n", turmas[i].aluno.nome);
+
+            printf("\t> Nova nota: ");
+            scanf("%f", &turmas[i].nota);
+
+            printf("\t> Novas horas participacao: ");
+            scanf("%f", &turmas[i].horasPart);
+
+            printf("\t> Novo ano: ");
+            scanf("%d", &turmas[i].ano);
+
+            salvarTurmas();
+
+            printf("\n\t[AVISO]Registro editado com sucesso! [AVISO]\n");
+            getchar();
+            getchar();
+            return;
+        }
+    }
+
+    if (achouDisc == 0) {
+        printf("\n\t[ERRO] O CPF %s nao pertence a turma %d.\n", cpfEdita, numBusca);
+    }
+
+   pausar();
+   return;
+}
+
+void excTurma(){
+
+    getchar();
+
+    int buscaNum, opE;
+    int achou = 0;
+
+    system("cls");
+
+    printf("\t+-------------------+\n");
+    printf("\t|   EXCLUIR TURMA   |\n");
+    printf("\t+-------------------+\n");
+
+    printf("\n\t> Digite o numero da turma que deseja excluir: ");
+    scanf("%d", &buscaNum);
+    getchar();
+
+    for(int i = 0; i < quantTurm; i++){
+        if(turmas[i].numTurma == buscaNum){
+            achou++;
+        }
+    }
+
+    if(achou == 0){
+        printf("\n\t[AVISO] Turma %d nao encontrada! [AVISO]\n", buscaNum);
+        pausar();
+        return;
+    }
+
+    printf("\n\tA turma %d possui %d discente(s) vinculado(s).\n", buscaNum, achou);
+
+    printf("\n\tDeseja realmente excluir TODOS os registros?");
+    printf("\n\t1 - SIM");
+    printf("\n\t2 - NAO");
+    printf("\n\t> Opcao: ");
+    scanf("%d", &opE);
+    getchar();
+
+    if(opE == 1){
+        for(int i = 0; i < quantTurm; i++){
+            if(turmas[i].numTurma == buscaNum){
+
+                turmas[i] = turmas[quantTurm - 1];
+                quantTurm--;
+                i--;
+            }
+        }
+
+        salvarTurmas();
+
+        printf("\n\t[AVISO] Turma %d excluida com exito! [AVISO]\n", buscaNum);
+
+    }else{
+
+        printf("\n\t[AVISO] Exclusao cancelada. [AVISO]\n");
+    }
+
+    pausar();
+}
+
 void pesTurma(){
     getchar();
     system("cls");
@@ -1323,67 +1375,6 @@ void pesTurma(){
     pausar();
 }
 
-void excTurma(){
-
-    getchar();
-
-    int buscaNum, opE;
-    int achou = 0;
-
-    system("cls");
-
-    printf("\t+-------------------+\n");
-    printf("\t|   EXCLUIR TURMA   |\n");
-    printf("\t+-------------------+\n");
-
-    printf("\n\t> Digite o numero da turma que deseja excluir: ");
-    scanf("%d", &buscaNum);
-    getchar();
-
-    for(int i = 0; i < quantTurm; i++){
-        if(turmas[i].numTurma == buscaNum){
-            achou++;
-        }
-    }
-
-    if(achou == 0){
-        printf("\n\t[AVISO] Turma %d nao encontrada! [AVISO]\n", buscaNum);
-        pausar();
-        return;
-    }
-
-    printf("\n\tA turma %d possui %d discente(s) vinculado(s).\n",
-           buscaNum, achou);
-
-    printf("\n\tDeseja realmente excluir TODOS os registros?");
-    printf("\n\t1 - SIM");
-    printf("\n\t2 - NAO");
-    printf("\n\t> Opcao: ");
-    scanf("%d", &opE);
-    getchar();
-
-    if(opE == 1){
-        for(int i = 0; i < quantTurm; i++){
-            if(turmas[i].numTurma == buscaNum){
-
-                turmas[i] = turmas[quantTurm - 1];
-                quantTurm--;
-                i--;
-            }
-        }
-
-        salvarTurmas();
-
-        printf("\n\t[AVISO] Turma %d excluida com exito! [AVISO]\n", buscaNum);
-
-    }else{
-
-        printf("\n\t[AVISO] Exclusao cancelada. [AVISO]\n");
-    }
-
-    pausar();
-}
-
 //==== ARQUIVOS TURMA ====
 
 int salvarTurmas(){
@@ -1397,24 +1388,9 @@ int salvarTurmas(){
 
     for(int i=0; i<quantTurm; i++){
 
-        fprintf(t, "%d;%d;%s;%s;%d;%d;%s;%d;%d;%d;%.2f;%.2f\n",
-
-            turmas[i].numTurma, //int
-            turmas[i].ano, //int
-
-            turmas[i].aluno.cpf, //string
-            turmas[i].aluno.nome, //string
-            turmas[i].aluno.idade, //int
-
-            turmas[i].curso.codigo, //int
-            turmas[i].curso.nomeCurso, //string
-            turmas[i].curso.horas, //int
-            turmas[i].curso.numVagas, //int
-            turmas[i].curso.numPart, //int
-
-            turmas[i].nota, //float
-            turmas[i].horasPart //float
-        );
+        fprintf(t, "%d;%d;%s;%s;%d;%d;%s;%d;%d;%d;%.2f;%.2f\n",turmas[i].numTurma, turmas[i].ano, turmas[i].aluno.cpf,
+            turmas[i].aluno.nome, turmas[i].aluno.idade, turmas[i].curso.codigo, turmas[i].curso.nomeCurso, turmas[i].curso.horas,
+                turmas[i].curso.numVagas, turmas[i].curso.numPart, turmas[i].nota, turmas[i].horasPart);
     }
 
     fclose(t);
@@ -1431,26 +1407,23 @@ void carregarTurmas(){
         return;
     }
 
-    while(fscanf(t,
-        "%d;%d;%14[^;];%99[^;];%d;%d;%99[^;];%d;%d;%d;%f;%f\n",
+    while(fscanf(t,"%d;%d;%14[^;];%99[^;];%d;%d;%99[^;];%d;%d;%d;%f;%f\n",
 
-        &turmas[quantTurm].numTurma, //int
-        &turmas[quantTurm].ano, //int
+        &turmas[quantTurm].numTurma, /*int*/
+        &turmas[quantTurm].ano, /*int*/
 
-        turmas[quantTurm].aluno.cpf, //string
-        turmas[quantTurm].aluno.nome, //string
-        &turmas[quantTurm].aluno.idade, //int
+        turmas[quantTurm].aluno.cpf, /*string*/
+        turmas[quantTurm].aluno.nome, /*string*/
+        &turmas[quantTurm].aluno.idade, /*int*/
 
-        &turmas[quantTurm].curso.codigo, //int
-        turmas[quantTurm].curso.nomeCurso, //string
-        &turmas[quantTurm].curso.horas, //int
-        &turmas[quantTurm].curso.numVagas, //int
-        &turmas[quantTurm].curso.numPart, //int
+        &turmas[quantTurm].curso.codigo, /*int*/
+        turmas[quantTurm].curso.nomeCurso, /*string*/
+        &turmas[quantTurm].curso.horas, /*int*/
+        &turmas[quantTurm].curso.numVagas, /*int*/
+        &turmas[quantTurm].curso.numPart, /*int*/
 
-        &turmas[quantTurm].nota, //float
-        &turmas[quantTurm].horasPart //float
-
-    ) != EOF){
+        &turmas[quantTurm].nota, /*float*/
+        &turmas[quantTurm].horasPart /*flaot*/) != EOF){
 
         quantTurm++;
 
